@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "96ea5313-48b1-484c-ab4d-0b61a5adc69b",
+		"_postman_id": "aa6acb71-bfc4-4077-8a08-8ad9224f4e9c",
 		"name": "Task Manager Api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "22492063"
+		"_exporter_id": "23194261",
+		"_collection_link": "https://lively-star-228888.postman.co/workspace/Team-Workspace~3eb63f3a-3c13-4217-834d-29125337db38/collection/23194261-aa6acb71-bfc4-4077-8a08-8ad9224f4e9c?action=share&source=collection_link&creator=23194261"
 	},
 	"item": [
 		{
@@ -16,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Himani Gangwar\",\r\n    \"email\": \"h3@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Himani Gangwar\",\r\n    \"email\": \"h4@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,11 +25,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/register",
+							"raw": "http://localhost:4000/api/v1/register",
+							"protocol": "http",
 							"host": [
-								"{{URL}}"
+								"localhost"
 							],
+							"port": "4000",
 							"path": [
+								"api",
+								"v1",
 								"register"
 							]
 						}
@@ -42,7 +47,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"h3@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"h4@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -50,11 +55,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/login",
+							"raw": "http://localhost:4000/api/v1/login",
+							"protocol": "http",
 							"host": [
-								"{{URL}}"
+								"localhost"
 							],
+							"port": "4000",
 							"path": [
+								"api",
+								"v1",
 								"login"
 							]
 						}
@@ -73,13 +82,13 @@
 						"header": [
 							{
 								"key": "authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y1ZjkyZTVmZmFhODRkNTZhNzljZjQiLCJlbWFpbCI6ImgzQGdtYWlsLmNvbSIsImlhdCI6MTc0NDIxNzYwMCwiZXhwIjoxNzQ0MjIxMjAwfQ._0hv4zB9pI2g04Yb9ejunV8NpqnuiNbYCJIX6E4WYcc",
+								"value": "Bearer {{Auth}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    title,\r\n     description, \r\n     status, \r\n     dueDate\r\n}",
+							"raw": "{\r\n    \"title\":\"himani\",\r\n     \"description\":\"We have to learn first Javascript\", \r\n     \"status\": \"pending\", \r\n     \"dueDate\":\"2025-04-11\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,11 +96,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/add/task",
+							"raw": "http://localhost:4000/api/v1/add/task",
+							"protocol": "http",
 							"host": [
-								"{{URL}}"
+								"localhost"
 							],
+							"port": "4000",
 							"path": [
+								"api",
+								"v1",
 								"add",
 								"task"
 							]
@@ -101,18 +114,21 @@
 				},
 				{
 					"name": "Get All Task",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y1ZjkyZTVmZmFhODRkNTZhNzljZjQiLCJlbWFpbCI6ImgzQGdtYWlsLmNvbSIsImlhdCI6MTc0NDIxNzYwMCwiZXhwIjoxNzQ0MjIxMjAwfQ._0hv4zB9pI2g04Yb9ejunV8NpqnuiNbYCJIX6E4WYcc",
+								"value": "Bearer {{Auth}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    title,\r\n     description, \r\n     status, \r\n     dueDate\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -120,19 +136,111 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/add/task",
+							"raw": "http://localhost:4000/api/v1/get/task?status=&page=1&limit=10",
+							"protocol": "http",
 							"host": [
-								"{{URL}}"
+								"localhost"
 							],
+							"port": "4000",
 							"path": [
-								"add",
+								"api",
+								"v1",
+								"get",
 								"task"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"NodeJs\",\r\n     \"description\":\"We have to learn first Javascript\", \r\n     \"status\": \"complete\", \r\n     \"dueDate\":\"2025-04-11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/v1/update/task/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"update",
+								"task",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{Auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/v1/delete/task/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"v1",
+								"delete",
+								"task",
+								"11"
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "status",
+			"value": "pending",
+			"type": "default"
 		}
 	]
 }

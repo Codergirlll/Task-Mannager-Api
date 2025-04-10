@@ -1,6 +1,6 @@
 const UserModel = require("../db/models/user.model");
 
-exports.Register = async (req, res) => {
+exports.Register = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -33,17 +33,19 @@ exports.Register = async (req, res) => {
       message: "User creation failed, please try again",
     });
   } catch (error) {
-    console.error("Error occurred while registering: ", error);
+    // console.error("Error occurred while registering: ", error);
 
-    res.status(500).json({
-      status: false,
-      message: "Failed to register the user",
-      error: error.message,
-    });
+    // res.status(500).json({
+    //   status: false,
+    //   message: "Failed to register the user",
+    //   error: error.message,
+    // });
+
+    next(error);
   }
 };
 
-exports.Login = async (req, res) => {
+exports.Login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -94,51 +96,15 @@ exports.Login = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error("Error occurred while log in: ", error);
-    return res.status(500).json({
-      status: false,
-      message: "Internal server error",
-      error: error.message,
-    });
+    // console.error("Error occurred while log in: ", error);
+    // return res.status(500).json({
+    //   status: false,
+    //   message: "Internal server error",
+    //   error: error.message,
+    // });
+
+    next(error);
   }
 };
 
-exports.Welcome = async (req, res) => {
-  try {
-    // console.log("WELCOME USER", req.user)
-    return res.status(200).json({
-      status: true,
-      message: "WELCOME USER",
-    });
-  } catch (error) {
-    console.error("Error occurred while Welocome: ", error);
-    return res.status(500).json({
-      status: false,
-      message: "Internal server error",
-      error: error.message,
-    });
-  }
-};
 
-exports.Logout = async (req, res) => {
-  console.log("Logout: ", res.cookie);
-  try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "staging",
-      sameSite: "Strict",
-    });
-
-    return res.status(200).json({
-      status: true,
-      message: "User logged out successfully",
-    });
-  } catch (error) {
-    console.error("Error occurred while logging out: ", error);
-    return res.status(500).json({
-      status: false,
-      message: "Internal server error",
-      error: error.message,
-    });
-  }
-};
