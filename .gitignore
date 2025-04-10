@@ -1,2 +1,30 @@
+# Node modules
 node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment variables
 .env
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Optional: coverage reports
+coverage/
+
+# Optional: debug logs
+*.pid
+*.seed
+
+# Optional: production build
+dist/
+build/
+
+# Optional: VSCode settings
+.vscode/
