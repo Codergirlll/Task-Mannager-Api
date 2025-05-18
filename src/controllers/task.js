@@ -1,7 +1,3 @@
-
-// Bonus(Optional for Extra Credit):
-// Enable Task Reminders(e.g., Notify users if a task is nearing its due date).
-
 const TaskModel = require("../db/models/task.model");
 let taskIdCounter = 1;
 
@@ -41,9 +37,7 @@ exports.AddTask = async (req, res, next) => {
 exports.GetTasks = async (req, res, next) => {
   // console.log("hello GetUser", req.user);
   try {
-
     const findQuery = { userId: req.user.userId };
-
 
     // Pagination and filtering logic
     const { status, page = 1, limit = 10 } = req.query;
@@ -51,8 +45,7 @@ exports.GetTasks = async (req, res, next) => {
     if (status) {
       findQuery.status = status;
     }
-    const GetAllTask = await TaskModel
-      .find(findQuery)
+    const GetAllTask = await TaskModel.find(findQuery)
       .skip((page - 1) * limit)
       .limit(Number(limit))
       .sort({ dueDate: 1 });
@@ -66,7 +59,7 @@ exports.GetTasks = async (req, res, next) => {
     //   return { ...task.toObject(), isDueSoon };
     // });
 
-    console.log((GetAllTask),)
+    console.log(GetAllTask);
     res.status(200).json({
       status: true,
       message: "Getting All Tasks",
@@ -106,11 +99,10 @@ exports.UpdateTask = async (req, res, next) => {
     );
 
     if (!updateTask) {
-      return res.status(404)
-        .json({
-          status: false,
-          message: "Task not found"
-        });
+      return res.status(404).json({
+        status: false,
+        message: "Task not found",
+      });
     }
 
     res.status(200).json({
@@ -118,8 +110,7 @@ exports.UpdateTask = async (req, res, next) => {
       message: "Task updated Successfully",
       updateTask,
     });
-  }
-  catch (err) {
+  } catch (err) {
     // console.log("error At add Tasks: ", err);
 
     // res.status(500).json({
@@ -128,8 +119,7 @@ exports.UpdateTask = async (req, res, next) => {
     // });
     next(err);
   }
-
-}
+};
 
 // for deleting the task
 exports.DeleteTask = async (req, res, next) => {
@@ -137,16 +127,16 @@ exports.DeleteTask = async (req, res, next) => {
   console.log("Delete Task, id: ", req.params.taskId);
 
   try {
-    const deleteTask = await TaskModel.findOneAndDelete(
-      { id: req.params.taskId, userId: req.user.userId },
-    );
+    const deleteTask = await TaskModel.findOneAndDelete({
+      id: req.params.taskId,
+      userId: req.user.userId,
+    });
 
     if (!deleteTask) {
-      return res.status(404)
-        .json({
-          status: false,
-          message: "Task not found"
-        });
+      return res.status(404).json({
+        status: false,
+        message: "Task not found",
+      });
     }
 
     res.status(200).json({
@@ -154,8 +144,7 @@ exports.DeleteTask = async (req, res, next) => {
       message: "Task deleted Successfully",
       deleteTask,
     });
-  }
-  catch (err) {
+  } catch (err) {
     // console.log("error At add Tasks: ", err);
 
     // res.status(500).json({
@@ -164,4 +153,4 @@ exports.DeleteTask = async (req, res, next) => {
     // });
     next(err);
   }
-}
+};
